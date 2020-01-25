@@ -23,20 +23,21 @@ installbbr(){
 	kernel_version="4.11.8"
 	rm -rf bbr
 	mkdir bbr && cd bbr
+	
 	if [[ "${release}" == "centos" ]]; then
 		if [[ ${version} == "6" ]]; then
-			wget --no-check-certificate https://github.com/ylx2016/kernel/releases/download/5.4.13/kernel-headers-5.4.13-1-c6.x86_64.rpm
-			wget --no-check-certificate https://github.com/ylx2016/kernel/releases/download/5.4.13/kernel-5.4.13-1-c6.x86_64.rpm
+			wget https://github.com/ylx2016/kernel/releases/download/5.4.13/kernel-headers-5.4.13-1-c6.x86_64.rpm
+			wget https://github.com/ylx2016/kernel/releases/download/5.4.13/kernel-5.4.13-1-c6.x86_64.rpm
 			rpm -i kernel-headers-5.4.13-1-c6.x86_64.rpm
 			rpm -i kernel-5.4.13-1-c6.x86_64.rpm
 		elif [[ ${version} == "7" ]]; then
-			wget --no-check-certificate https://github.com/ylx2016/kernel/releases/download/5.4.13/kernel-headers-5.4.13-1-c7.x86_64.rpm
-			wget --no-check-certificate https://github.com/ylx2016/kernel/releases/download/5.4.13/kernel-5.4.13-1-c7.x86_64.rpm
+			wget https://github.com/ylx2016/kernel/releases/download/5.4.13/kernel-headers-5.4.13-1-c7.x86_64.rpm
+			wget https://github.com/ylx2016/kernel/releases/download/5.4.13/kernel-5.4.13-1-c7.x86_64.rpm
 			rpm -i kernel-headers-5.4.13-1-c7.x86_64.rpm
 			rpm -i kernel-5.4.13-1-c7.x86_64.rpm
 		elif [[ ${version} == "8" ]]; then
-			wget --no-check-certificate https://github.com/ylx2016/kernel/releases/download/5.4.13/kernel-headers-5.4.13-1-c8.x86_64.rpm
-			wget --no-check-certificate https://github.com/ylx2016/kernel/releases/download/5.4.13/kernel-5.4.13-1-c8.x86_64.rpm
+			wget https://github.com/ylx2016/kernel/releases/download/5.4.13/kernel-headers-5.4.13-1-c8.x86_64.rpm
+			wget https://github.com/ylx2016/kernel/releases/download/5.4.13/kernel-5.4.13-1-c8.x86_64.rpm
 			rpm -i kernel-headers-5.4.13-1-c8.x86_64.rpm
 			rpm -i kernel-5.4.13-1-c8.x86_64.rpm	
 		fi
@@ -44,15 +45,18 @@ installbbr(){
 	elif [[ "${release}" == "debian" || "${release}" == "ubuntu" ]]; then
 		if [[ "${release}" == "debian" ]]; then
 			if [[ ${version} == "9" ]]; then
-			wget --no-check-certificate https://github.com/ylx2016/kernel/releases/download/5.4.13/linux-headers-5.4.13_5.4.13-1-d9_amd64.deb
-			wget --no-check-certificate https://github.com/ylx2016/kernel/releases/download/5.4.13/linux-image-5.4.13_5.4.13-1-d9_amd64.deb
-			dpkg -i linux-headers-5.4.13_5.4.13-1-d9_amd64.deb
-			dpkg -i linux-image-5.4.13_5.4.13-1-d9_amd64.deb
-		elif [[ ${version} == "10" ]]; then
-			wget --no-check-certificate https://github.com/ylx2016/kernel/releases/download/5.4.13/linux-headers-5.4.13_5.4.13-1-d10_amd64.deb
-			wget --no-check-certificate https://github.com/ylx2016/kernel/releases/download/5.4.13/linux-image-5.4.13_5.4.13-1-d10_amd64.deb
-			dpkg -i linux-headers-5.4.13_5.4.13-1-d10_amd64.deb
-			dpkg -i linux-image-5.4.13_5.4.13-1-d10_amd64.deb
+				wget https://github.com/ylx2016/kernel/releases/download/5.4.13/linux-headers-5.4.13_5.4.13-1-d9_amd64.deb
+				wget https://github.com/ylx2016/kernel/releases/download/5.4.13/linux-image-5.4.13_5.4.13-1-d9_amd64.deb
+				dpkg -i linux-headers-5.4.13_5.4.13-1-d9_amd64.deb
+				dpkg -i linux-image-5.4.13_5.4.13-1-d9_amd64.deb
+
+			elif [[ ${version} == "10" ]]; then
+				wget https://github.com/ylx2016/kernel/releases/download/5.4.13/linux-headers-5.4.13_5.4.13-1-d10_amd64.deb
+				wget https://github.com/ylx2016/kernel/releases/download/5.4.13/linux-image-5.4.13_5.4.13-1-d10_amd64.deb
+				dpkg -i linux-headers-5.4.13_5.4.13-1-d10_amd64.deb
+				dpkg -i linux-image-5.4.13_5.4.13-1-d10_amd64.deb
+			fi	
+			
 		else	
 			wget http://security.debian.org/debian-security/pool/updates/main/o/openssl/libssl1.0.0_1.0.1t-1+deb8u10_amd64.deb
 			wget -N --no-check-certificate http://${github}/bbr/debian-ubuntu/linux-headers-${kernel_version}-all.deb
@@ -85,19 +89,19 @@ installbbrplus(){
 	mkdir bbrplus && cd bbrplus
 	if [[ "${release}" == "centos" ]]; then
 		if [[ ${version} == "6" ]]; then
-			wget --no-check-certificate https://github.com/ylx2016/kernel/releases/download/4.14.166-bbrplus/kernel-headers-4.14.166_bbrplus-1-c6.x86_64.rpm
-			wget --no-check-certificate https://github.com/ylx2016/kernel/releases/download/4.14.166-bbrplus/kernel-4.14.166_bbrplus-1-c6.x86_64.rpm
+			wget https://github.com/ylx2016/kernel/releases/download/4.14.166-bbrplus/kernel-headers-4.14.166_bbrplus-1-c6.x86_64.rpm
+			wget https://github.com/ylx2016/kernel/releases/download/4.14.166-bbrplus/kernel-4.14.166_bbrplus-1-c6.x86_64.rpm
 			rpm -i kernel-headers-4.14.166_bbrplus-1-c6.x86_64.rpm
 			rpm -i kernel-4.14.166_bbrplus-1-c6.x86_64.rpm
 		elif [[ ${version} == "7" ]]; then
-			wget --no-check-certificate https://github.com/ylx2016/kernel/releases/download/4.14.166-bbrplus/kernel-headers-4.14.166_bbrplus-1-c7.x86_64.rpm
-			wget --no-check-certificate https://github.com/ylx2016/kernel/releases/download/4.14.166-bbrplus/kernel-4.14.166_bbrplus-1-c7.x86_64.rpm
+			wget https://github.com/ylx2016/kernel/releases/download/4.14.166-bbrplus/kernel-headers-4.14.166_bbrplus-1-c7.x86_64.rpm
+			wget https://github.com/ylx2016/kernel/releases/download/4.14.166-bbrplus/kernel-4.14.166_bbrplus-1-c7.x86_64.rpm
 			rpm -i kernel-headers-4.14.166_bbrplus-1-c7.x86_64.rpm
 			rpm -i kernel-4.14.166_bbrplus-1-c7.x86_64.rpm
 			
 		elif [[ ${version} == "8" ]]; then
-			wget --no-check-certificate https://github.com/ylx2016/kernel/releases/download/4.14.166-bbrplus/kernel-headers-4.14.166_bbrplus-1-c8.x86_64.rpm
-			wget --no-check-certificate https://github.com/ylx2016/kernel/releases/download/4.14.166-bbrplus/kernel-4.14.166_bbrplus-1-c8.x86_64.rpm
+			wget https://github.com/ylx2016/kernel/releases/download/4.14.166-bbrplus/kernel-headers-4.14.166_bbrplus-1-c8.x86_64.rpm
+			wget https://github.com/ylx2016/kernel/releases/download/4.14.166-bbrplus/kernel-4.14.166_bbrplus-1-c8.x86_64.rpm
 			rpm -i kernel-headers-4.14.166_bbrplus-1-c8.x86_64.rpm
 			rpm -i kernel-4.14.166_bbrplus-1-c8.x86_64.rpm
 		fi
@@ -105,15 +109,16 @@ installbbrplus(){
 	elif [[ "${release}" == "debian" || "${release}" == "ubuntu" ]]; then
 		if [[ "${release}" == "debian" ]]; then
 			if [[ ${version} == "9" ]]; then
-			wget --no-check-certificate https://github.com/ylx2016/kernel/releases/download/4.14.166-bbrplus/linux-headers-4.14.166-bbrplus_4.14.166-bbrplus-1-d9_amd64.deb
-			wget --no-check-certificate https://github.com/ylx2016/kernel/releases/download/4.14.166-bbrplus/linux-image-4.14.166-bbrplus_4.14.166-bbrplus-1-d9_amd64.deb
-			dpkg -i linux-headers-4.14.166-bbrplus_4.14.166-bbrplus-1-d9_amd64.deb
-			dpkg -i linux-image-4.14.166-bbrplus_4.14.166-bbrplus-1-d9_amd64.deb
-		elif [[ ${version} == "10" ]]; then
-			wget --no-check-certificate https://github.com/ylx2016/kernel/releases/download/4.14.166-bbrplus/linux-headers-4.14.166-bbrplus_4.14.166-bbrplus-1-d10_amd64.deb
-			wget --no-check-certificate https://github.com/ylx2016/kernel/releases/download/4.14.166-bbrplus/linux-image-4.14.166-bbrplus_4.14.166-bbrplus-1-d10_amd64.deb
-			dpkg -i linux-headers-4.14.166-bbrplus_4.14.166-bbrplus-1-d10_amd64.deb
-			dpkg -i linux-image-4.14.166-bbrplus_4.14.166-bbrplus-1-d10_amd64.deb
+				wget https://github.com/ylx2016/kernel/releases/download/4.14.166-bbrplus/linux-headers-4.14.166-bbrplus_4.14.166-bbrplus-1-d9_amd64.deb
+				wget https://github.com/ylx2016/kernel/releases/download/4.14.166-bbrplus/linux-image-4.14.166-bbrplus_4.14.166-bbrplus-1-d9_amd64.deb
+				dpkg -i linux-headers-4.14.166-bbrplus_4.14.166-bbrplus-1-d9_amd64.deb
+				dpkg -i linux-image-4.14.166-bbrplus_4.14.166-bbrplus-1-d9_amd64.deb
+			elif [[ ${version} == "10" ]]; then
+				wget https://github.com/ylx2016/kernel/releases/download/4.14.166-bbrplus/linux-headers-4.14.166-bbrplus_4.14.166-bbrplus-1-d10_amd64.deb
+				wget https://github.com/ylx2016/kernel/releases/download/4.14.166-bbrplus/linux-image-4.14.166-bbrplus_4.14.166-bbrplus-1-d10_amd64.deb
+				dpkg -i linux-headers-4.14.166-bbrplus_4.14.166-bbrplus-1-d10_amd64.deb
+				dpkg -i linux-image-4.14.166-bbrplus_4.14.166-bbrplus-1-d10_amd64.deb
+			fi	
 		else	
 			wget -N --no-check-certificate https://github.com/ylx2016/kernel/raw/2020.1.17/debian9/linux-headers-4.14.165-bbrplus_4.14.165-bbrplus-1_amd64.deb
 			wget -N --no-check-certificate https://github.com/ylx2016/kernel/raw/2020.1.17/debian9/linux-image-4.14.165-bbrplus_4.14.165-bbrplus-1_amd64.deb
