@@ -25,17 +25,17 @@ installbbr(){
 	mkdir bbr && cd bbr
 	
 	if [[ "${release}" == "centos" ]]; then
-		if [[ ${version} == "6" ]]; then
+		if [[ ${version} = "6" ]]; then
 			wget https://github.com/ylx2016/kernel/releases/download/5.4.13/kernel-headers-5.4.13-1-c6.x86_64.rpm
 			wget https://github.com/ylx2016/kernel/releases/download/5.4.13/kernel-5.4.13-1-c6.x86_64.rpm
 			rpm -i kernel-headers-5.4.13-1-c6.x86_64.rpm
 			rpm -i kernel-5.4.13-1-c6.x86_64.rpm
-		elif [[ ${version} == "7" ]]; then
+		elif [[ ${version} = "7" ]]; then
 			wget https://github.com/ylx2016/kernel/releases/download/5.4.13/kernel-headers-5.4.13-1-c7.x86_64.rpm
 			wget https://github.com/ylx2016/kernel/releases/download/5.4.13/kernel-5.4.13-1-c7.x86_64.rpm
 			rpm -i kernel-headers-5.4.13-1-c7.x86_64.rpm
 			rpm -i kernel-5.4.13-1-c7.x86_64.rpm
-		elif [[ ${version} == "8" ]]; then
+		elif [[ ${version} = "8" ]]; then
 			wget https://github.com/ylx2016/kernel/releases/download/5.4.13/kernel-headers-5.4.13-1-c8.x86_64.rpm
 			wget https://github.com/ylx2016/kernel/releases/download/5.4.13/kernel-5.4.13-1-c8.x86_64.rpm
 			rpm -i kernel-headers-5.4.13-1-c8.x86_64.rpm
@@ -44,13 +44,13 @@ installbbr(){
 	
 	elif [[ "${release}" == "debian" || "${release}" == "ubuntu" ]]; then
 		if [[ "${release}" == "debian" ]]; then
-			if [[ ${version} == "9" ]]; then
+			if [[ ${version} = "9" ]]; then
 				wget https://github.com/ylx2016/kernel/releases/download/5.4.13/linux-headers-5.4.13_5.4.13-1-d9_amd64.deb
 				wget https://github.com/ylx2016/kernel/releases/download/5.4.13/linux-image-5.4.13_5.4.13-1-d9_amd64.deb
 				dpkg -i linux-headers-5.4.13_5.4.13-1-d9_amd64.deb
 				dpkg -i linux-image-5.4.13_5.4.13-1-d9_amd64.deb
 
-			elif [[ ${version} == "10" ]]; then
+			elif [[ ${version} = "10" ]]; then
 				wget https://github.com/ylx2016/kernel/releases/download/5.4.13/linux-headers-5.4.13_5.4.13-1-d10_amd64.deb
 				wget https://github.com/ylx2016/kernel/releases/download/5.4.13/linux-image-5.4.13_5.4.13-1-d10_amd64.deb
 				dpkg -i linux-headers-5.4.13_5.4.13-1-d10_amd64.deb
@@ -88,32 +88,33 @@ installbbrplus(){
 	rm -rf bbrplus
 	mkdir bbrplus && cd bbrplus
 	if [[ "${release}" == "centos" ]]; then
-		if [[ ${version} == "6" ]]; then
-			wget https://github.com/ylx2016/kernel/releases/download/4.14.166-bbrplus/kernel-headers-4.14.166_bbrplus-1-c6.x86_64.rpm
-			wget https://github.com/ylx2016/kernel/releases/download/4.14.166-bbrplus/kernel-4.14.166_bbrplus-1-c6.x86_64.rpm
+		if [[ ${version} = "6" ]]; then
+			wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/4.14.166-bbrplus/kernel-headers-4.14.166_bbrplus-1-c6.x86_64.rpm
+			wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/4.14.166-bbrplus/kernel-4.14.166_bbrplus-1-c6.x86_64.rpm
 			rpm -i kernel-headers-4.14.166_bbrplus-1-c6.x86_64.rpm
 			rpm -i kernel-4.14.166_bbrplus-1-c6.x86_64.rpm
-		elif [[ ${version} == "7" ]]; then
-			wget https://github.com/ylx2016/kernel/releases/download/4.14.166-bbrplus/kernel-headers-4.14.166_bbrplus-1-c7.x86_64.rpm
-			wget https://github.com/ylx2016/kernel/releases/download/4.14.166-bbrplus/kernel-4.14.166_bbrplus-1-c7.x86_64.rpm
+		elif [[ ${version} = "7" ]]; then
+			wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/4.14.166-bbrplus/kernel-headers-4.14.166_bbrplus-1-c7.x86_64.rpm
+			wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/4.14.166-bbrplus/kernel-4.14.166_bbrplus-1-c7.x86_64.rpm
 			rpm -i kernel-headers-4.14.166_bbrplus-1-c7.x86_64.rpm
 			rpm -i kernel-4.14.166_bbrplus-1-c7.x86_64.rpm
 			
-		elif [[ ${version} == "8" ]]; then
-			wget https://github.com/ylx2016/kernel/releases/download/4.14.166-bbrplus/kernel-headers-4.14.166_bbrplus-1-c8.x86_64.rpm
-			wget https://github.com/ylx2016/kernel/releases/download/4.14.166-bbrplus/kernel-4.14.166_bbrplus-1-c8.x86_64.rpm
+		elif [[ ${version} = "8" ]]; then
+			wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/4.14.166-bbrplus/kernel-headers-4.14.166_bbrplus-1-c8.x86_64.rpm
+			wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/4.14.166-bbrplus/kernel-4.14.166_bbrplus-1-c8.x86_64.rpm
 			rpm -i kernel-headers-4.14.166_bbrplus-1-c8.x86_64.rpm
 			rpm -i kernel-4.14.166_bbrplus-1-c8.x86_64.rpm
 		fi
 		
 	elif [[ "${release}" == "debian" || "${release}" == "ubuntu" ]]; then
 		if [[ "${release}" == "debian" ]]; then
-			if [[ ${version} == "9" ]]; then
+			if [[ ${version} = "9" ]]; then
 				wget https://github.com/ylx2016/kernel/releases/download/4.14.166-bbrplus/linux-headers-4.14.166-bbrplus_4.14.166-bbrplus-1-d9_amd64.deb
 				wget https://github.com/ylx2016/kernel/releases/download/4.14.166-bbrplus/linux-image-4.14.166-bbrplus_4.14.166-bbrplus-1-d9_amd64.deb
 				dpkg -i linux-headers-4.14.166-bbrplus_4.14.166-bbrplus-1-d9_amd64.deb
 				dpkg -i linux-image-4.14.166-bbrplus_4.14.166-bbrplus-1-d9_amd64.deb
-			elif [[ ${version} == "10" ]]; then
+				
+			elif [[ ${version} = "10" ]]; then
 				wget https://github.com/ylx2016/kernel/releases/download/4.14.166-bbrplus/linux-headers-4.14.166-bbrplus_4.14.166-bbrplus-1-d10_amd64.deb
 				wget https://github.com/ylx2016/kernel/releases/download/4.14.166-bbrplus/linux-image-4.14.166-bbrplus_4.14.166-bbrplus-1-d10_amd64.deb
 				dpkg -i linux-headers-4.14.166-bbrplus_4.14.166-bbrplus-1-d10_amd64.deb
@@ -124,8 +125,7 @@ installbbrplus(){
 			wget -N --no-check-certificate https://github.com/ylx2016/kernel/raw/2020.1.17/debian9/linux-image-4.14.165-bbrplus_4.14.165-bbrplus-1_amd64.deb
 			dpkg -i linux-headers-4.14.165-bbrplus_4.14.165-bbrplus-1_amd64.deb
 			dpkg -i linux-image-4.14.165-bbrplus_4.14.165-bbrplus-1_amd64.deb
-		fi	
-	
+		fi
 	fi
 	
 	cd .. && rm -rf bbrplus	
@@ -577,7 +577,7 @@ check_sys_bbr(){
 	#	fi
 	#elif [[ "${release}" == "debian" ]]; then
 	#	if [[ ${version} -ge "8" ]]; then
-			installbbr
+	#		installbbr
 	#	else
 	#		echo -e "${Error} BBR内核不支持当前系统 ${release} ${version} ${bit} !" && exit 1
 	#	fi
@@ -596,7 +596,7 @@ check_sys_bbrplus(){
 	check_version
 	#if [[ "${release}" == "centos" ]]; then
 	#	if [[ ${version} -ge "6" ]]; then
-	#		installbbrplus
+			installbbrplus
 	#	else
 	#		echo -e "${Error} BBRplus内核不支持当前系统 ${release} ${version} ${bit} !" && exit 1
 	#	fi
