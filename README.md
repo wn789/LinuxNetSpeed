@@ -9,7 +9,7 @@ wget -N --no-check-certificate "https://raw.githubusercontent.com/ylx2016/Linux-
 for bbr/bbrplus
 centos6,7,8
 debian8.9.10
-ubuntu16,18,19
+ubuntu16,18,19 尚未施工
 锐速保持原来一致
 
 双持bbr+锐速
