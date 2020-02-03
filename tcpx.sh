@@ -3,9 +3,8 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 
 #=================================================
-#	System Required: CentOS 6/7/8,Debian 9/10
-#	Description: BBR+BBR魔改版+BBRplus+Lotserver
-#	支持bbr centos6,7,8 debian
+#	System Required: CentOS 6/7/8,Debian 8/9/10,ubuntu 16/18/19
+#	Description: BBR+BBRplus+Lotserver
 #	Version: 1.3.2.2
 #	Author: 千影,cx9208,YLX
 #   	不卸载内核版本
