@@ -4,7 +4,7 @@ export PATH
 
 #=================================================
 #	System Required: CentOS 6/7/8,Debian 9/10
-#	Description: BBR+BBR魔改版+BBRplus+Lotserver
+#	Description: BBR+BBRplus+Lotserver
 #	支持bbr centos6,7,8 debian
 #	Version: 1.3.2.2
 #	Author: 千影,cx9208,YLX
