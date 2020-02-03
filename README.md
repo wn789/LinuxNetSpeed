@@ -5,6 +5,12 @@ wget -N --no-check-certificate "https://raw.githubusercontent.com/ylx2016/Linux-
 卸载内核 
 wget -N --no-check-certificate "https://raw.githubusercontent.com/ylx2016/Linux-NetSpeed/2020.2.3/tcp.sh" && chmod +x tcp.sh && ./tcp.sh
 
+支持版本
+for bbr/bbrplus
+centos6,7,8
+debian8.9.10
+ubuntu16,18,19
+锐速保持原来一致
 
 双持bbr+锐速
 bbr 添加
