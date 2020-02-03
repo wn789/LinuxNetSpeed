@@ -107,6 +107,46 @@ installbbr(){
 					echo -e "${Error} 还在用32位内核，别再见了 !" && exit 1
 				fi
 			fi	
+		elif [[ "${release}" == "ubuntu" ]]; then
+			
+			if [[ ${version} = "16" ]]; then
+				if [[ ${bit} = "x86_64" ]]; then
+					wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/5.4.14/linux-headers-5.4.14_5.4.14-1-u16_amd64.deb
+					wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/5.4.14/linux-image-5.4.14_5.4.14-1-u16_amd64.deb
+				
+					dpkg -i linux-image-5.4.14_5.4.14-1-u16_amd64.deb
+					dpkg -i linux-headers-5.4.14_5.4.14-1-u16_amd64.deb
+				
+					kernel_version="5.4.14"
+				else
+					echo -e "${Error} 还在用32位内核，别再见了 !" && exit 1
+				fi
+		
+			elif [[ ${version} = "18" ]]; then
+				if [[ ${bit} = "x86_64" ]]; then
+					wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/5.4.14/linux-headers-5.4.14_5.4.14-1-u18_amd64.deb
+					wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/5.4.14/linux-image-5.4.14_5.4.14-1-u18_amd64.deb
+				
+					dpkg -i linux-image-5.4.14_5.4.14-1-u18_amd64.deb
+					dpkg -i linux-headers-5.4.14_5.4.14-1-u18_amd64.deb
+				
+					kernel_version="5.4.14"
+				else
+					echo -e "${Error} 还在用32位内核，别再见了 !" && exit 1
+				fi
+			elif [[ ${version} = "19" ]]; then
+				if [[ ${bit} = "x86_64" ]]; then
+					wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/5.4.14/linux-headers-5.4.14_5.4.14-1-u19_amd64.deb
+					wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/5.4.14/linux-image-5.4.14_5.4.14-1-u19_amd64.deb
+				
+					dpkg -i linux-image-5.4.14_5.4.14-1-u19_amd64.deb
+					dpkg -i linux-headers-5.4.14_5.4.14-1-u19_amd64.deb
+				
+					kernel_version="5.4.14"
+				else
+					echo -e "${Error} 还在用32位内核，别再见了 !" && exit 1
+				fi
+			fi			
 			
 		#else	
 		#	wget http://security.debian.org/debian-security/pool/updates/main/o/openssl/libssl1.0.0_1.0.1t-1+deb8u10_amd64.deb
@@ -213,7 +253,46 @@ installbbrplus(){
 				else
 					echo -e "${Error} 还在用32位内核，别再见了 !" && exit 1
 				fi		
-			fi	
+			fi
+		elif [[ "${release}" == "ubuntu" ]]; then
+			if [[ ${version} = "16" ]]; then
+				if [[ ${bit} = "x86_64" ]]; then
+					wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/4.14.168bbrplus/linux-headers-4.14.168-bbrplus_4.14.168-bbrplus-1-u16_amd64.deb
+					wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/4.14.168bbrplus/linux-image-4.14.168-bbrplus_4.14.168-bbrplus-1-u16_amd64.deb
+					
+					dpkg -i linux-headers-4.14.168-bbrplus_4.14.168-bbrplus-1-u16_amd64.deb
+					dpkg -i linux-image-4.14.168-bbrplus_4.14.168-bbrplus-1-u16_amd64.deb
+					
+					kernel_version="4.14.168-bbrplus"
+				else
+					echo -e "${Error} 还在用32位内核，别再见了 !" && exit 1
+				fi	
+		
+			elif [[ ${version} = "18" ]]; then
+				if [[ ${bit} = "x86_64" ]]; then
+					wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/4.14.168bbrplus/linux-headers-4.14.168-bbrplus_4.14.168-bbrplus-1-u118_amd64.deb
+					wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/4.14.168bbrplus/linux-image-4.14.168-bbrplus_4.14.168-bbrplus-1-u18_amd64.deb
+					
+					dpkg -i linux-headers-4.14.168-bbrplus_4.14.168-bbrplus-1-u18_amd64.deb
+					dpkg -i linux-image-4.14.168-bbrplus_4.14.168-bbrplus-1-u18_amd64.deb
+				
+					kernel_version="4.14.168-bbrplus"
+				else
+					echo -e "${Error} 还在用32位内核，别再见了 !" && exit 1
+				fi	
+			elif [[ ${version} = "10" ]]; then
+				if [[ ${bit} = "x86_64" ]]; then
+					wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/4.14.168bbrplus/linux-headers-4.14.168-bbrplus_4.14.168-bbrplus-1-u19_amd64.deb
+					wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/4.14.168bbrplus/linux-image-4.14.168-bbrplus_4.14.168-bbrplus-1-u19_amd64.deb
+					
+					dpkg -i linux-headers-4.14.168-bbrplus_4.14.168-bbrplus-1-u19_amd64.deb
+					dpkg -i linux-image-4.14.168-bbrplus_4.14.168-bbrplus-1-u19_amd64.deb
+				
+					kernel_version="4.14.168-bbrplus"
+				else
+					echo -e "${Error} 还在用32位内核，别再见了 !" && exit 1
+				fi		
+			fi			
 		#else	
 		#	wget -N --no-check-certificate https://github.com/ylx2016/kernel/raw/2020.1.17/debian9/linux-headers-4.14.165-bbrplus_4.14.165-bbrplus-1_amd64.deb
 		#	wget -N --no-check-certificate https://github.com/ylx2016/kernel/raw/2020.1.17/debian9/linux-image-4.14.165-bbrplus_4.14.165-bbrplus-1_amd64.deb
