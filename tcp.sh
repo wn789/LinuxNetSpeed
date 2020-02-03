@@ -8,7 +8,6 @@ export PATH
 #	支持bbr centos6,7,8 debian
 #	Version: 1.3.2.2
 #	Author: 千影,cx9208,YLX
-#   不删除内核版本
 #=================================================
 
 sh_ver="1.3.2.2"
