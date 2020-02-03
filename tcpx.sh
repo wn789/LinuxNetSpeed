@@ -8,7 +8,7 @@ export PATH
 #	支持bbr centos6,7,8 debian
 #	Version: 1.3.2.2
 #	Author: 千影,cx9208,YLX
-#   不删除内核版本
+#   	不卸载内核版本
 #=================================================
 
 sh_ver="1.3.2.2"
@@ -496,7 +496,7 @@ Update_Shell(){
 #开始菜单
 start_menu(){
 clear
-echo && echo -e " TCP加速 一键安装管理脚本 ${Red_font_prefix}[v${sh_ver}]${Font_color_suffix}
+echo && echo -e " TCP加速 一键安装管理脚本 不卸载内核版本 ${Red_font_prefix}[v${sh_ver}]${Font_color_suffix}
   
  ${Green_font_prefix}0.${Font_color_suffix} 升级脚本
 ————————————内核管理————————————
