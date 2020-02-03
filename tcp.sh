@@ -617,6 +617,7 @@ BBR_grub(){
                 echo -e "${Error} /boot/grub2/grub.cfg 找不到，请检查."
                 exit 1
             fi
+	    grub2-mkconfig  -o   /boot/grub2/grub.cfg
             grub2-set-default 0
         fi
     elif [[ "${release}" == "debian" || "${release}" == "ubuntu" ]]; then
