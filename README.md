@@ -27,6 +27,9 @@ bash /appex/bin/lotServer.sh status | grep "LotServer"
 检查bbr ?
 lsmod | grep bbr
 
+检查centos安装内核
+grubby --info=ALL|awk -F= '$1=="kernel" {print i++ " : " $2}'
+
 查看当前支持TCP算法
 cat /proc/sys/net/ipv4/tcp_allowed_congestion_control
 查看当前运行的算法
