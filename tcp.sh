@@ -11,7 +11,7 @@ export PATH
 #   不删除内核版本
 #=================================================
 
-sh_ver="1.3.2.1"
+sh_ver="1.3.2.2"
 github="raw.githubusercontent.com/ylx2016/Linux-NetSpeed/master"
 
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
