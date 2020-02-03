@@ -22,6 +22,7 @@ Tip="${Green_font_prefix}[注意]${Font_color_suffix}"
 #安装BBR内核
 installbbr(){
 	kernel_version="4.11.8"
+	bit=`uname -m`
 	rm -rf bbr
 	mkdir bbr && cd bbr
 	
@@ -137,6 +138,7 @@ installbbr(){
 #安装BBRplus内核
 installbbrplus(){
 	kernel_version="4.14.160-bbrplus"
+	bit=`uname -m`
 	rm -rf bbrplus
 	mkdir bbrplus && cd bbrplus
 	if [[ "${release}" == "centos" ]]; then
