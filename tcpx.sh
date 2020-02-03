@@ -189,7 +189,7 @@ installbbrplus(){
 				rpm -i kernel-4.14.168_bbrplus-1-c6.x86_64.rpm
 				rpm -i kernel-headers-4.14.168_bbrplus-1-c6.x86_64.rpm
 			
-				kernel_version="4.14.168-bbrplus"
+				kernel_version="4.14.168_bbrplus"
 			else
 				echo -e "${Error} 还在用32位内核，别再见了 !" && exit 1
 			fi
@@ -201,7 +201,7 @@ installbbrplus(){
 				rpm -i kernel-4.14.168_bbrplus-1-c7.x86_64.rpm
 				rpm -i kernel-headers-4.14.168_bbrplus-1-c7.x86_64.rpm
 			
-				kernel_version="4.14.168-bbrplus"
+				kernel_version="4.14.168_bbrplus"
 			else
 				echo -e "${Error} 还在用32位内核，别再见了 !" && exit 1
 			fi
@@ -211,7 +211,7 @@ installbbrplus(){
 				rpm -i kernel-4.14.168_bbrplus-1-c8.x86_64.rpm
 				rpm -i kernel-headers-4.14.168_bbrplus-1-c8.x86_64.rpm
 			
-			kernel_version="4.14.168-bbrplus"
+			kernel_version="4.14.168_bbrplus"
 		fi
 		
 	elif [[ "${release}" == "debian" || "${release}" == "ubuntu" ]]; then
