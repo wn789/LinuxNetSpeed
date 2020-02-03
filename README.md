@@ -1,9 +1,9 @@
 # Linux-NetSpeed
 ```
 不卸载内核
-wget -N --no-check-certificate "https://raw.githubusercontent.com/ylx2016/Linux-NetSpeed/master/tcpx.sh" && chmod +x tcpx.sh && ./tcpx.sh
-卸载内核 不更新了 自己去更新
-wget -N --no-check-certificate "https://raw.githubusercontent.com/ylx2016/Linux-NetSpeed/master/tcp.sh" && chmod +x tcp.sh && ./tcp.sh
+wget -N --no-check-certificate "https://github.com/ylx2016/Linux-NetSpeed/tree/2020.2.3/tcpx.sh" && chmod +x tcpx.sh && ./tcpx.sh
+卸载内核 
+wget -N --no-check-certificate "https://github.com/ylx2016/Linux-NetSpeed/tree/2020.2.3/tcp.sh" && chmod +x tcp.sh && ./tcp.sh
 
 
 双持bbr+锐速
