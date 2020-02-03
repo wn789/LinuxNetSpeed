@@ -3,14 +3,15 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 
 #=================================================
-#	System Required: CentOS 6/7,Debian 8/9,Ubuntu 16+
+#	System Required: CentOS 6/7/8,Debian 9/10
 #	Description: BBR+BBR魔改版+BBRplus+Lotserver
-#	Version: 1.3.2
-#	Author: 千影,cx9208
-#	Blog: https://www.94ish.me/
+#	支持bbr centos6,7,8 debian
+#	Version: 1.3.2.2
+#	Author: 千影,cx9208,YLX
+#   不删除内核版本
 #=================================================
 
-sh_ver="1.3.2"
+sh_ver="1.3.2.1"
 github="raw.githubusercontent.com/ylx2016/Linux-NetSpeed/master"
 
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
@@ -21,25 +22,106 @@ Tip="${Green_font_prefix}[注意]${Font_color_suffix}"
 #安装BBR内核
 installbbr(){
 	kernel_version="4.11.8"
-	if [[ "${release}" == "centos" ]]; then
-		rpm --import http://${github}/bbr/${release}/RPM-GPG-KEY-elrepo.org
-		yum install -y http://${github}/bbr/${release}/${version}/${bit}/kernel-ml-${kernel_version}.rpm
-		yum remove -y kernel-headers
-		yum install -y http://${github}/bbr/${release}/${version}/${bit}/kernel-ml-headers-${kernel_version}.rpm
-		yum install -y http://${github}/bbr/${release}/${version}/${bit}/kernel-ml-devel-${kernel_version}.rpm
-	elif [[ "${release}" == "debian" || "${release}" == "ubuntu" ]]; then
-		mkdir bbr && cd bbr
-		wget http://security.debian.org/debian-security/pool/updates/main/o/openssl/libssl1.0.0_1.0.1t-1+deb8u10_amd64.deb
-		wget -N --no-check-certificate http://${github}/bbr/debian-ubuntu/linux-headers-${kernel_version}-all.deb
-		wget -N --no-check-certificate http://${github}/bbr/debian-ubuntu/${bit}/linux-headers-${kernel_version}.deb
-		wget -N --no-check-certificate http://${github}/bbr/debian-ubuntu/${bit}/linux-image-${kernel_version}.deb
+	rm -rf bbr
+	mkdir bbr && cd bbr
 	
-		dpkg -i libssl1.0.0_1.0.1t-1+deb8u10_amd64.deb
-		dpkg -i linux-headers-${kernel_version}-all.deb
-		dpkg -i linux-headers-${kernel_version}.deb
-		dpkg -i linux-image-${kernel_version}.deb
-		cd .. && rm -rf bbr
+	if [[ "${release}" == "centos" ]]; then
+		if [[ ${version} = "6" ]]; then
+			if [[ ${bit} = "x86_64" ]]; then
+				wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/5.4.13/kernel-headers-5.4.13-1-c6.x86_64.rpm
+				wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/5.4.13/kernel-5.4.13-1-c6.x86_64.rpm
+			
+				rpm -i kernel-5.4.13-1-c6.x86_64.rpm
+				rpm -i kernel-headers-5.4.13-1-c6.x86_64.rpm
+			
+				kernel_version="5.4.13"
+			else
+				echo -e "${Error} 还在用32位内核，别再见了 !" && exit 1
+			fi
+		
+			
+			
+		elif [[ ${version} = "7" ]]; then
+			if [[ ${bit} = "x86_64" ]]; then
+				wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/5.5.0/kernel-5.5.0-1-c7.x86_64.rpm
+				wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/5.5.0/kernel-headers-5.5.0-1-c7.x86_64.rpm
+
+				rpm -i kernel-5.5.0-1-c7.x86_64.rpm
+				rpm -i kernel-headers-5.5.0-1-c7.x86_64.rpm
+			
+				kernel_version="5.5.0"
+			else
+				echo -e "${Error} 还在用32位内核，别再见了 !" && exit 1
+			fi	
+			
+		elif [[ ${version} = "8" ]]; then
+			wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/5.5.0/kernel-5.5.0-1-c8.x86_64.rpm
+			wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/5.5.0/kernel-headers-5.5.0-1-c8.x86_64.rpm
+
+			rpm -i kernel-5.5.0-1-c8.x86_64.rpm
+			rpm -i kernel-headers-5.5.0-1-c8.x86_64.rpm
+			
+			kernel_version="5.5.0"
+			
+		fi
+	
+	elif [[ "${release}" == "debian" || "${release}" == "ubuntu" ]]; then
+		if [[ "${release}" == "debian" ]]; then
+			
+			if [[ ${version} = "8" ]]; then
+				if [[ ${bit} = "x86_64" ]]; then
+					wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/5.4.14/linux-headers-5.4.14_5.4.14-1-d8_amd64.deb
+					wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/5.4.14/linux-image-5.4.14_5.4.14-1-d8_amd64.deb
+				
+					dpkg -i linux-image-5.4.14_5.4.14-1-d8_amd64.deb
+					dpkg -i linux-headers-5.4.14_5.4.14-1-d8_amd64.deb
+				
+					kernel_version="5.4.14"
+				else
+					echo -e "${Error} 还在用32位内核，别再见了 !" && exit 1
+				fi
+		
+			elif [[ ${version} = "9" ]]; then
+				if [[ ${bit} = "x86_64" ]]; then
+					wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/5.5.0/linux-headers-5.5.0_5.5.0-1-d9_amd64.deb
+					wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/5.5.0/linux-image-5.5.0_5.5.0-1-d9_amd64.deb
+				
+					dpkg -i linux-image-5.5.0_5.5.0-1-d9_amd64.deb
+					dpkg -i linux-headers-5.5.0_5.5.0-1-d9_amd64.deb
+				
+					kernel_version="5.5.0"
+				else
+					echo -e "${Error} 还在用32位内核，别再见了 !" && exit 1
+				fi
+			elif [[ ${version} = "10" ]]; then
+				if [[ ${bit} = "x86_64" ]]; then
+					wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/5.5.0/linux-headers-5.5.0_5.5.0-1-d10_amd64.deb
+					wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/5.5.0/linux-image-5.5.0_5.5.0-1-d10_amd64.deb
+				
+					dpkg -i linux-image-5.5.0_5.5.0-1-d10_amd64.deb
+					dpkg -i linux-headers-5.5.0_5.5.0-1-d10_amd64.deb
+				
+					kernel_version="5.5.0"
+				else
+					echo -e "${Error} 还在用32位内核，别再见了 !" && exit 1
+				fi
+			fi	
+			
+		#else	
+		#	wget http://security.debian.org/debian-security/pool/updates/main/o/openssl/libssl1.0.0_1.0.1t-1+deb8u10_amd64.deb
+		#	wget -N --no-check-certificate http://${github}/bbr/debian-ubuntu/linux-headers-${kernel_version}-all.deb
+		#	wget -N --no-check-certificate http://${github}/bbr/debian-ubuntu/${bit}/linux-headers-${kernel_version}.deb
+		#	wget -N --no-check-certificate http://${github}/bbr/debian-ubuntu/${bit}/linux-image-${kernel_version}.deb
+	
+		#	dpkg -i libssl1.0.0_1.0.1t-1+deb8u10_amd64.deb
+		#	dpkg -i linux-headers-${kernel_version}-all.deb
+		#	dpkg -i linux-headers-${kernel_version}.deb
+		#	dpkg -i linux-image-${kernel_version}.deb
+		fi
 	fi
+	
+	cd .. && rm -rf bbr	
+	
 	detele_kernel
 	BBR_grub
 	echo -e "${Tip} 重启VPS后，请重新运行脚本开启${Red_font_prefix}BBR/BBR魔改版${Font_color_suffix}"
@@ -49,24 +131,99 @@ installbbr(){
 		echo -e "${Info} VPS 重启中..."
 		reboot
 	fi
+	#echo -e "${Tip} 内核安装完毕，请参考上面的信息检查是否安装成功及手动调整内核启动顺序"
 }
 
 #安装BBRplus内核
 installbbrplus(){
-	kernel_version="4.14.158-bbrplus"
+	kernel_version="4.14.160-bbrplus"
+	rm -rf bbrplus
+	mkdir bbrplus && cd bbrplus
 	if [[ "${release}" == "centos" ]]; then
-		wget -N --no-check-certificate https://${github}/bbrplus/${release}/${version}/kernel-${kernel_version}.rpm
-		yum install -y kernel-${kernel_version}.rpm
-		rm -f kernel-${kernel_version}.rpm
-		kernel_version="4.14.158_bbrplus" #fix a bug
+		if [[ ${version} = "6" ]]; then
+			if [[ ${bit} = "x86_64" ]]; then
+				wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/4.14.168bbrplus/kernel-headers-4.14.168_bbrplus-1-c6.x86_64.rpm
+				wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/4.14.168bbrplus/kernel-4.14.168_bbrplus-1-c6.x86_64.rpm
+				rpm -i kernel-4.14.168_bbrplus-1-c6.x86_64.rpm
+				rpm -i kernel-headers-4.14.168_bbrplus-1-c6.x86_64.rpm
+			
+				kernel_version="4.14.168-bbrplus"
+			else
+				echo -e "${Error} 还在用32位内核，别再见了 !" && exit 1
+			fi
+			
+		elif [[ ${version} = "7" ]]; then
+			if [[ ${bit} = "x86_64" ]]; then
+				wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/4.14.168bbrplus/kernel-headers-4.14.168_bbrplus-1-c7.x86_64.rpm
+				wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/4.14.168bbrplus/kernel-4.14.168_bbrplus-1-c7.x86_64.rpm
+				rpm -i kernel-4.14.168_bbrplus-1-c7.x86_64.rpm
+				rpm -i kernel-headers-4.14.168_bbrplus-1-c7.x86_64.rpm
+			
+				kernel_version="4.14.168-bbrplus"
+			else
+				echo -e "${Error} 还在用32位内核，别再见了 !" && exit 1
+			fi
+		elif [[ ${version} = "8" ]]; then
+							wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/4.14.168bbrplus/kernel-headers-4.14.168_bbrplus-1-c8.x86_64.rpm
+				wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/4.14.168bbrplus/kernel-4.14.168_bbrplus-1-c8.x86_64.rpm
+				rpm -i kernel-4.14.168_bbrplus-1-c8.x86_64.rpm
+				rpm -i kernel-headers-4.14.168_bbrplus-1-c8.x86_64.rpm
+			
+			kernel_version="4.14.168-bbrplus"
+		fi
+		
 	elif [[ "${release}" == "debian" || "${release}" == "ubuntu" ]]; then
-		mkdir bbrplus && cd bbrplus
-		wget -N --no-check-certificate http://${github}/bbrplus/debian-ubuntu/${bit}/linux-headers-${kernel_version}.deb
-		wget -N --no-check-certificate http://${github}/bbrplus/debian-ubuntu/${bit}/linux-image-${kernel_version}.deb
-		dpkg -i linux-headers-${kernel_version}.deb
-		dpkg -i linux-image-${kernel_version}.deb
-		cd .. && rm -rf bbrplus
+		if [[ "${release}" == "debian" ]]; then
+			if [[ ${version} = "8" ]]; then
+				if [[ ${bit} = "x86_64" ]]; then
+					wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/4.14.168bbrplus/linux-headers-4.14.168-bbrplus_4.14.168-bbrplus-1-d8_amd64.deb
+					wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/4.14.168bbrplus/linux-image-4.14.168-bbrplus_4.14.168-bbrplus-1-d8_amd64.deb
+					
+					dpkg -i linux-headers-4.14.168-bbrplus_4.14.168-bbrplus-1-d8_amd64.deb
+					dpkg -i linux-image-4.14.168-bbrplus_4.14.168-bbrplus-1-d8_amd64.deb
+					
+					kernel_version="4.14.168-bbrplus"
+				else
+					echo -e "${Error} 还在用32位内核，别再见了 !" && exit 1
+				fi	
+		
+			elif [[ ${version} = "9" ]]; then
+				if [[ ${bit} = "x86_64" ]]; then
+					wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/4.14.168bbrplus/linux-headers-4.14.168-bbrplus_4.14.168-bbrplus-1-d9_amd64.deb
+					wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/4.14.168bbrplus/linux-image-4.14.168-bbrplus_4.14.168-bbrplus-1-d9_amd64.deb
+					
+					dpkg -i linux-headers-4.14.168-bbrplus_4.14.168-bbrplus-1-d9_amd64.deb
+					dpkg -i linux-image-4.14.168-bbrplus_4.14.168-bbrplus-1-d9_amd64.deb
+				
+					kernel_version="4.14.168-bbrplus"
+				else
+					echo -e "${Error} 还在用32位内核，别再见了 !" && exit 1
+				fi	
+			elif [[ ${version} = "10" ]]; then
+				if [[ ${bit} = "x86_64" ]]; then
+					wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/4.14.168bbrplus/linux-headers-4.14.168-bbrplus_4.14.168-bbrplus-1-d10_amd64.deb
+					wget -N --no-check-certificate https://github.com/ylx2016/kernel/releases/download/4.14.168bbrplus/linux-image-4.14.168-bbrplus_4.14.168-bbrplus-1-d10_amd64.deb
+					
+					dpkg -i linux-headers-4.14.168-bbrplus_4.14.168-bbrplus-1-d10_amd64.deb
+					dpkg -i linux-image-4.14.168-bbrplus_4.14.168-bbrplus-1-d10_amd64.deb
+				
+					kernel_version="4.14.168-bbrplus"
+				else
+					echo -e "${Error} 还在用32位内核，别再见了 !" && exit 1
+				fi		
+			fi	
+		#else	
+		#	wget -N --no-check-certificate https://github.com/ylx2016/kernel/raw/2020.1.17/debian9/linux-headers-4.14.165-bbrplus_4.14.165-bbrplus-1_amd64.deb
+		#	wget -N --no-check-certificate https://github.com/ylx2016/kernel/raw/2020.1.17/debian9/linux-image-4.14.165-bbrplus_4.14.165-bbrplus-1_amd64.deb
+		#	dpkg -i linux-headers-4.14.165-bbrplus_4.14.165-bbrplus-1_amd64.deb
+		#	dpkg -i linux-image-4.14.165-bbrplus_4.14.165-bbrplus-1_amd64.deb
+			
+		#	kernel_version="4.14.165-bbrplus"
+			
+		fi
 	fi
+	
+	cd .. && rm -rf bbrplus
 	detele_kernel
 	BBR_grub
 	echo -e "${Tip} 重启VPS后，请重新运行脚本开启${Red_font_prefix}BBRplus${Font_color_suffix}"
@@ -76,6 +233,7 @@ installbbrplus(){
 		echo -e "${Info} VPS 重启中..."
 		reboot
 	fi
+	#echo -e "${Tip} 内核安装完毕，请参考上面的信息检查是否安装成功及手动调整内核启动顺序"
 }
 
 #安装Lotserver内核
@@ -93,6 +251,7 @@ installlot(){
 	elif [[ "${release}" == "debian" ]]; then
 		bash <(wget --no-check-certificate -qO- "http://${github}/Debian_Kernel.sh")
 	fi
+	
 	detele_kernel
 	BBR_grub
 	echo -e "${Tip} 重启VPS后，请重新运行脚本开启${Red_font_prefix}Lotserver${Font_color_suffix}"
@@ -102,6 +261,7 @@ installlot(){
 		echo -e "${Info} VPS 重启中..."
 		reboot
 	fi
+	#echo -e "${Tip} 内核安装完毕，请参考上面的信息检查是否安装成功及手动调整内核启动顺序"
 }
 
 #启用BBR
@@ -335,7 +495,6 @@ Update_Shell(){
 start_menu(){
 clear
 echo && echo -e " TCP加速 一键安装管理脚本 ${Red_font_prefix}[v${sh_ver}]${Font_color_suffix}
-  -- 就是爱生活 | 94ish.me --
   
  ${Green_font_prefix}0.${Font_color_suffix} 升级脚本
 ————————————内核管理————————————
@@ -508,19 +667,19 @@ check_version(){
 check_sys_bbr(){
 	check_version
 	if [[ "${release}" == "centos" ]]; then
-		if [[ ${version} -ge "6" ]]; then
+		if [[ ${version} = "6" || ${version} = "7" || ${version} = "8" ]]; then
 			installbbr
 		else
 			echo -e "${Error} BBR内核不支持当前系统 ${release} ${version} ${bit} !" && exit 1
 		fi
 	elif [[ "${release}" == "debian" ]]; then
-		if [[ ${version} -ge "8" ]]; then
+		if [[ ${version} = "8" || ${version} = "9" || ${version} = "10" ]]; then
 			installbbr
 		else
 			echo -e "${Error} BBR内核不支持当前系统 ${release} ${version} ${bit} !" && exit 1
 		fi
 	elif [[ "${release}" == "ubuntu" ]]; then
-		if [[ ${version} -ge "14" ]]; then
+		if [[ ${version} = "16" || ${version} = "18" || ${version} = "19" ]]; then
 			installbbr
 		else
 			echo -e "${Error} BBR内核不支持当前系统 ${release} ${version} ${bit} !" && exit 1
@@ -533,19 +692,19 @@ check_sys_bbr(){
 check_sys_bbrplus(){
 	check_version
 	if [[ "${release}" == "centos" ]]; then
-		if [[ ${version} -ge "6" ]]; then
+		if [[ ${version} = "6" || ${version} = "7" || ${version} = "8" ]]; then
 			installbbrplus
 		else
 			echo -e "${Error} BBRplus内核不支持当前系统 ${release} ${version} ${bit} !" && exit 1
 		fi
 	elif [[ "${release}" == "debian" ]]; then
-		if [[ ${version} -ge "8" ]]; then
+		if [[ ${version} = "8" || ${version} = "9" || ${version} = "10" ]]; then
 			installbbrplus
 		else
 			echo -e "${Error} BBRplus内核不支持当前系统 ${release} ${version} ${bit} !" && exit 1
 		fi
 	elif [[ "${release}" == "ubuntu" ]]; then
-		if [[ ${version} -ge "14" ]]; then
+		if [[ ${version} = "16" || ${version} = "18" || ${version} = "19" ]]; then
 			installbbrplus
 		else
 			echo -e "${Error} BBRplus内核不支持当前系统 ${release} ${version} ${bit} !" && exit 1
@@ -565,7 +724,7 @@ check_sys_Lotsever(){
 			installlot
 		elif [[ ${version} == "7" ]]; then
 			yum -y install net-tools
-			kernel_version="3.10.0-957"
+			kernel_version="4.11.2-1"
 			installlot
 		else
 			echo -e "${Error} Lotsever不支持当前系统 ${release} ${version} ${bit} !" && exit 1
@@ -607,9 +766,9 @@ check_sys_Lotsever(){
 check_status(){
 	kernel_version=`uname -r | awk -F "-" '{print $1}'`
 	kernel_version_full=`uname -r`
-	if [[ ${kernel_version_full} = "4.14.129-bbrplus" ]]; then
+	if [[ ${kernel_version_full} = "4.14.166-bbrplus" ]]; then
 		kernel_status="BBRplus"
-	elif [[ ${kernel_version} = "3.10.0" || ${kernel_version} = "3.16.0" || ${kernel_version} = "3.2.0" || ${kernel_version} = "4.4.0" || ${kernel_version} = "3.13.0"  || ${kernel_version} = "2.6.32" || ${kernel_version} = "4.9.0" ]]; then
+	elif [[ ${kernel_version} = "3.10.0" || ${kernel_version} = "3.16.0" || ${kernel_version} = "3.2.0" || ${kernel_version} = "4.4.0" || ${kernel_version} = "3.13.0"  || ${kernel_version} = "2.6.32" || ${kernel_version} = "4.9.0" || ${kernel_version} = "4.11.2" ]]; then
 		kernel_status="Lotserver"
 	elif [[ `echo ${kernel_version} | awk -F'.' '{print $1}'` == "4" ]] && [[ `echo ${kernel_version} | awk -F'.' '{print $2}'` -ge 9 ]] || [[ `echo ${kernel_version} | awk -F'.' '{print $1}'` == "5" ]]; then
 		kernel_status="BBR"
@@ -617,18 +776,8 @@ check_status(){
 		kernel_status="noinstall"
 	fi
 
-	if [[ ${kernel_status} == "Lotserver" ]]; then
-		if [[ -e /appex/bin/lotServer.sh ]]; then
-			run_status=`bash /appex/bin/lotServer.sh status | grep "LotServer" | awk  '{print $3}'`
-			if [[ ${run_status} = "running!" ]]; then
-				run_status="启动成功"
-			else 
-				run_status="启动失败"
-			fi
-		else 
-			run_status="未安装加速模块"
-		fi
-	elif [[ ${kernel_status} == "BBR" ]]; then
+
+	if [[ ${kernel_status} == "BBR" ]]; then
 		run_status=`grep "net.ipv4.tcp_congestion_control" /etc/sysctl.conf | awk -F "=" '{print $2}'`
 		if [[ ${run_status} == "bbr" ]]; then
 			run_status=`lsmod | grep "bbr" | awk '{print $1}'`
@@ -654,6 +803,18 @@ check_status(){
 		else 
 			run_status="未安装加速模块"
 		fi
+		
+	elif [[ ${kernel_status} == "Lotserver" ]]; then
+		if [[ -e /appex/bin/lotServer.sh ]]; then
+			run_status=`bash /appex/bin/lotServer.sh status | grep "LotServer" | awk  '{print $3}'`
+			if [[ ${run_status} = "running!" ]]; then
+				run_status="启动成功"
+			else 
+				run_status="启动失败"
+			fi
+		else 
+			run_status="未安装加速模块"
+		fi	
 	elif [[ ${kernel_status} == "BBRplus" ]]; then
 		run_status=`grep "net.ipv4.tcp_congestion_control" /etc/sysctl.conf | awk -F "=" '{print $2}'`
 		if [[ ${run_status} == "bbrplus" ]]; then
