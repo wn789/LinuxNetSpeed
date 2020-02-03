@@ -848,7 +848,7 @@ check_sys_Lotsever(){
 check_status(){
 	kernel_version=`uname -r | awk -F "-" '{print $1}'`
 	kernel_version_full=`uname -r`
-	if [[ ${kernel_version_full} = "4.14.168-bbrplus" ]]; then
+	if [[ ${kernel_version_full} = "4.14.168-bbrplus" || ${kernel_version_full} = "4.14.98-bbrplus" || ${kernel_version_full} = "4.14.129-bbrplus" || ${kernel_version_full} = "4.14.160-bbrplus" || ${kernel_version_full} = "4.14.166-bbrplus" || ${kernel_version_full} = "4.14.161-bbrplus" ]]; then
 		kernel_status="BBRplus"
 	elif [[ ${kernel_version} = "3.10.0" || ${kernel_version} = "3.16.0" || ${kernel_version} = "3.2.0" || ${kernel_version} = "4.4.0" || ${kernel_version} = "3.13.0"  || ${kernel_version} = "2.6.32" || ${kernel_version} = "4.9.0" || ${kernel_version} = "4.11.2" ]]; then
 		kernel_status="Lotserver"
@@ -860,10 +860,10 @@ check_status(){
 
 
 	if [[ ${kernel_status} == "BBR" ]]; then
-		run_status=`grep "net.ipv4.tcp_congestion_control" /etc/sysctl.conf | awk -F "=" '{print $2}'`
+		run_status=`cat /proc/sys/net/ipv4/tcp_congestion_control | awk '{print $1}'`
 		if [[ ${run_status} == "bbr" ]]; then
-			run_status=`lsmod | grep "bbr" | awk '{print $1}'`
-			if [[ ${run_status} == "tcp_bbr" ]]; then
+			run_status=`cat /proc/sys/net/ipv4/tcp_congestion_control | awk '{print $1}'`
+			if [[ ${run_status} == "bbr" ]]; then
 				run_status="BBR启动成功"
 			else 
 				run_status="BBR启动失败"
@@ -898,10 +898,10 @@ check_status(){
 			run_status="未安装加速模块"
 		fi	
 	elif [[ ${kernel_status} == "BBRplus" ]]; then
-		run_status=`grep "net.ipv4.tcp_congestion_control" /etc/sysctl.conf | awk -F "=" '{print $2}'`
+		run_status=`cat /proc/sys/net/ipv4/tcp_congestion_control | awk '{print $1}'`
 		if [[ ${run_status} == "bbrplus" ]]; then
-			run_status=`lsmod | grep "bbrplus" | awk '{print $1}'`
-			if [[ ${run_status} == "tcp_bbrplus" ]]; then
+			run_status=`cat /proc/sys/net/ipv4/tcp_congestion_control | awk '{print $1}'`
+			if [[ ${run_status} == "bbrplus" ]]; then
 				run_status="BBRplus启动成功"
 			else 
 				run_status="BBRplus启动失败"
